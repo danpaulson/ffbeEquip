@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  ffbe.app:
+    container_name: ffbe.app
+    build:
+      context: .
+      dockerfile: ./_docker/app/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/srv/web/ffbeequip.com
+    command: tail -f /dev/null
+  
+  ffbe.varnish:
+    container_name: ffbe.varnish
+    build:
+      context: .
+      dockerfile: ./_docker/varnish/Dockerfile
+    links:
+      - ffbe.app
+    expose:
+      - "6081"
+    volumes:
+      - ./_docker/varnish/varnish.vcl:/etc/varnish/default.vcl
+
+  ffbe.nginx:
+    container_name: ffbe.nginx
+    build:
+      context: .
+      dockerfile: ./_docker/nginx/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - ffbe.varnish
+    volumes:
+      - .:/srv/web/ffbeequip.com
