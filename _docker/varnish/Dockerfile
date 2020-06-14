@@ -27,7 +27,7 @@ RUN chmod +x /usr/local/bin/start-varnish /usr/local/bin/vrl
 RUN echo 'alias vl="varnishlog"' >> ~/.bashrc
 RUN echo 'alias vld="varnishlog -c -i VCL_Log,VCL_call"' >> ~/.bashrc
 RUN echo 'alias vlc="varnishadm vcl.show boot"' >> ~/.bashrc
-RUN echo 'alias vba="varnishadm ban req.url ~ /"' >> ~/.bashrc
+RUN echo 'alias vba="varnishadm \"ban req.url ~ /\""' >> ~/.bashrc
 
 # Start Varnish
 CMD ["start-varnish"]

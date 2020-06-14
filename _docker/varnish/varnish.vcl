@@ -30,4 +30,13 @@ sub vcl_backend_response {
     }
 
     set beresp.ttl = 10m;
+
+    # GZip
+    if (beresp.http.url ~ "\.(jpg|png|gif|gz|tgz|bz2|tbz|mp3|ogg|swf)$") {
+        set beresp.do_gzip = false;
+    }
+    else {
+        set beresp.do_gzip = true;
+        set beresp.http.X-Cache = "ZIP";
+    }
 }
