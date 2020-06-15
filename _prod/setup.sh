@@ -9,11 +9,11 @@ apt-get install varnish nginx
 service varnish stop
 
 mv /etc/varnish/default.vcl /etc/varnish/default.vcl.org
-ln -s $REPO_DIR/_prod/varnish.vcl /etc/varnish/default.vcl
-ln -s $REPO_DIR/_prod/varnish.service /etc/systemd/system/varnish.service
+ln -sfn $REPO_DIR/_prod/varnish.vcl /etc/varnish/default.vcl
+ln -sfn $REPO_DIR/_prod/varnish.service /etc/systemd/system/varnish.service
 
 # Nginx
-ln -s $REPO_DIR/_prod/nginx.conf /etc/nginx/sites-enabled/$REPO_NAME
+ln -sfn $REPO_DIR/_prod/nginx.conf /etc/nginx/sites-enabled/$REPO_NAME
 
 systemctl daemon-reload
 service varnish start
