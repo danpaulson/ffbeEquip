@@ -17,3 +17,4 @@ ln -sfn $REPO_DIR/_prod/nginx.conf /etc/nginx/sites-enabled/$REPO_NAME
 
 systemctl daemon-reload
 service varnish start
+service nginx reload
