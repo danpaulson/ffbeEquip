@@ -9,7 +9,7 @@ sub vcl_recv {
     # Only Cache certain data files
     if (req.url ~ "^/googleOAuth*" ||
         req.url ~ "^/(.*)/settings" ||
-        req.url ~ "^/(.*)/units" ||
+        req.url ~ "^/(.*)/units.json" ||
         req.url ~ "^/(.*)/defaultExclusionList" ||
         req.url ~ "^/(.*)/espers" ||
         req.url ~ "^/(.*)/itemInventory"
